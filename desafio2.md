@@ -139,5 +139,8 @@ docker run -i --rm ganho-capital bash -c 'java -jar ./app.jar' <<EOF
 
 EOF
 ```
-
-# Considerações
+                                                                    
+### Instruções
+      1. Faça o fork do desafio;
+      2. Crie um repositório privado no seu github para o projeto;
+      3. Após concluir seu trabalho faça um push;
