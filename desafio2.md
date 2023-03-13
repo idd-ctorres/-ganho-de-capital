@@ -104,11 +104,7 @@ Output:
 
 # Arquitetura
 
-<Resumo do codigo>
-
-Essas classes representam uma operação financeira com uma determinada regra para calcular o imposto.
-
-Essa estratégia tem a vantagem de facilidade de manutenção e evolução do código.
+<Resumo do codigo e estratégia utillizada>
 
 # Bibliotecas
 
