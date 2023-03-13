@@ -1,22 +1,22 @@
 # Cenário
 
-A Dock está crescendo e expandindo seus negócios, gerando novas oportunidades de revolucionar o mercado financeiro e criar produtos diferenciados.
-Nossa próxima missão é construir uma nova conta digital Dock para nossos clientes utilizarem através de endpoints, onde receberemos requisições em um novo backend que deverá gerenciar as contas e seus portadores (os donos das contas digitais).
+A IDD está crescendo e expandindo seus negócios, gerando novas oportunidades de revolucionar o mercado financeiro e criar produtos diferenciados.
+Nossa próxima missão é construir uma nova conta digital IDD para nossos clientes utilizarem através de endpoints, onde receberemos requisições em um novo backend que deverá gerenciar as contas e seus portadores (os donos das contas digitais).
 
 # Requisitos
 
 - Deve ser possível criar e remover **portadores**
     - Um **portador** deve conter apenas seu *nome completo* e *CPF*
     - O *CPF* deve ser válido e único no cadastro de **portadores**
-- As **contas digital Dock** devem conter as seguintes funcionalidades:
+- As **contas digital IDD** devem conter as seguintes funcionalidades:
     - A conta deve ser criada utilizando o *CPF* do **portador**
     - Uma conta deve ter seu *saldo*, *número* e *agência* disponíveis para consulta
-    - Um **portador** pode fechar a **conta digital Dock** a qualquer instante
+    - Um **portador** pode fechar a **conta digital IDD** a qualquer instante
     - Não é necessário as operações de *saque* e *depósito*
     
 ## Regulação obrigatória
 
-- Precisamos *bloquear* e *desbloquear* a **conta digital Dock** a qualquer momento
+- Precisamos *bloquear* e *desbloquear* a **conta digital IDD** a qualquer momento
 
 #  Orientações
 
@@ -29,7 +29,7 @@ Desenvolva o case seguindo as melhores práticas que julgar necessário, aplique
 
 ## Diferenciais
 
-- Práticas, padrões e conceitos de microservices será considerado um diferencial para nós por existir uma variedade de produtos e serviços dentro da Dock.
+- Práticas, padrões e conceitos de microservices será considerado um diferencial para nós por existir uma variedade de produtos e serviços dentro da IDD.
 - Temos 100% das nossas aplicações e infraestrutura na nuvem, consideramos um diferencial, caso o desafio seja projeto para ser executado na nuvem.
 - Nossos times são autônomos e têm liberdade para definir arquiteturas e soluções. Por este motivo será considerado diferencial toda: arquitetura, design, paradigma e documentação detalhando a sua abordagem.
 
