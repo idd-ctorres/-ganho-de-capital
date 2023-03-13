@@ -20,3 +20,9 @@ Imprima o texto "R$" seguido de um espaço e do valor total devido de Imposto de
 Renda, com duas casas após o ponto. Se o valor de entrada for menor ou igual a
 2000, deverá ser impressa a mensagem "Isento".
 */
+
+
+### Instruções
+      1. Faça o fork do desafio;
+      2. Crie um repositório privado no seu github para o projeto;
+      3. Após concluir seu trabalho faça um push;
