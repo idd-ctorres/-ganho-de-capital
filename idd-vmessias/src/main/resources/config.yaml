@@ -1,0 +1,3 @@
+tax:
+  percentage: 20
+  minOperation: 20000.01
