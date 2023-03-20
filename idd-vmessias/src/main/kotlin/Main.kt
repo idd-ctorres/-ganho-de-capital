@@ -18,19 +18,8 @@ fun readOperations(args: Array<String>) : ArrayList<Array<Operation>> {
     val readStrategy = StreamReadWriteStrategyFactory.ofType("json")
 
     do {
-        var input : String? = null
+        val input = readlnOrNull()
 
-        if (args.isEmpty()) {
-            // Se não foi informado input na execução, então esperamos ser passado via readln
-            input = readlnOrNull()
-        } else {
-            // Se foi passado input, então separamos o input por quebra de linha e convertemos o JSON
-            args[0].lines().forEach {
-                operations.add( readStrategy.read( it.trimIndent().byteInputStream() ) )
-            }
-        }
-
-        // Se foi inserido input no console então processamos
         input?.trim()?.takeIf { input.isNotEmpty() }?.also {
             operations.add( readStrategy.read( input.trimIndent().byteInputStream() ) )
         }
