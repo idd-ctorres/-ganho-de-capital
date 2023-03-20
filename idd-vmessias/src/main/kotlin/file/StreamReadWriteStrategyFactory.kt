@@ -1,19 +1,19 @@
-package file.read
+package file
 
 /*
     Factory que cria uma estratégia de leitura de acordo com o nome do arquivo \ tipo do conteúdo.
     Quando criado a partir de um nome do arquivo, o nome do arquivo deve conter a extensão. Exemplo: *.json, *.yaml;
     Dessa forma a classe consegue inferir o tipo do conteúdo utilizando a extensão
  */
-object StreamReadStrategyFactory {
+object StreamReadWriteStrategyFactory {
 
     // Lista de estratégias
-    private val strategies : List<StreamReadStrategy> = listOf(
-        StreamReadYamlStrategy(),
-        StreamReadJsonStrategy()
+    private val strategies : List<StreamReadWriteStrategy> = listOf(
+        StreamReadWriteYamlStrategy(),
+        StreamReadWriteJsonStrategy()
     )
 
-    fun ofFileName(fileName: String) : StreamReadStrategy {
+    fun ofFileName(fileName: String) : StreamReadWriteStrategy {
 
         // Splita o filename por '.' separando a extensão
         val fileType: String = fileName.split(".")
@@ -25,7 +25,7 @@ object StreamReadStrategyFactory {
         return ofType(fileType)
     }
 
-    fun ofType(fileType: String): StreamReadStrategy {
+    fun ofType(fileType: String): StreamReadWriteStrategy {
         return strategies
             // Pega o primeiro registro utilizando o filtro informado
             .firstOrNull { t -> t.handle(fileType) }

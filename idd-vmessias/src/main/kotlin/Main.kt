@@ -1,56 +1,71 @@
-import file.read.StreamReadStrategyFactory
-import file.read.read
+import file.StreamReadWriteStrategyFactory
+import file.read
+import file.write
 import model.Operation
-import model.OperationType
+import util.Logger
+import java.io.ByteArrayOutputStream
 
 fun main(args: Array<String>) {
-    val operations : Array<Operation> = StreamReadStrategyFactory.ofType("json").let { it ->
-        val stream = """
-            [
-                {"operation":"buy", "unit-cost":20.00, "quantity": 10},
-                {"operation":"sell", "unit-cost":19.00,  "quantity": 5},
-                {"operation":"buy", "unit-cost":10.00, "quantity": 5}
-            ]
-            """.trimIndent().byteInputStream()
 
-        it.read(stream)
-    }
+    val operations = readOperations(args)
 
-    // OperationConsolidation
-    var mediaPonderada = 0.0;
-    var qtAcoesAtual = 0.0;
+    process(operations)
+}
 
-    operations.forEach { operation ->
+fun readOperations(args: Array<String>) : ArrayList<Array<Operation>> {
 
-        if (operation.operation == OperationType.BUY) {
-            mediaPonderada = if (mediaPonderada == 0.0) {
-                operation.unitCost
-            } else {
-                val mediaPonderadaNova =
-                    ((qtAcoesAtual * mediaPonderada) + (operation.quantity * operation.unitCost)) / (qtAcoesAtual + operation.quantity)
-                println("mediaPonderada = (($qtAcoesAtual * $mediaPonderada) + (${operation.quantity} * ${operation.unitCost})) / ($qtAcoesAtual + ${operation.quantity})")
-                mediaPonderadaNova
-            }
+    val operations : ArrayList<Array<Operation>> = arrayListOf()
+    val readStrategy = StreamReadWriteStrategyFactory.ofType("json")
 
-            qtAcoesAtual += operation.quantity
+    do {
+        var input : String? = null
 
-            println("Média ponderada = $mediaPonderada")
-        }
-
-        if (operation.operation == OperationType.SELL) {
-            qtAcoesAtual -= operation.quantity
-            val resultado = (operation.unitCost - mediaPonderada) * operation.quantity
-
-            if (resultado > 0) {
-                println("Lucro: $resultado")
-            } else {
-                println("Prejuízo: $resultado")
+        if (args.isEmpty()) {
+            // Se não foi informado input na execução, então esperamos ser passado via readln
+            input = readlnOrNull()
+        } else {
+            // Se foi passado input, então separamos o input por quebra de linha e convertemos o JSON
+            args[0].lines().forEach {
+                operations.add( readStrategy.read( it.trimIndent().byteInputStream() ) )
             }
         }
 
+        // Se foi inserido input no console então processamos
+        input?.trim()?.takeIf { input.isNotEmpty() }?.also {
+            operations.add( readStrategy.read( input.trimIndent().byteInputStream() ) )
+        }
+
+    } while (!input.isNullOrEmpty())
+
+    return operations
+}
+
+fun process(operations: ArrayList<Array<Operation>>) {
+
+    val operationProcessor = OperationProcessor()
+
+    if (operations.isEmpty()) {
+        Logger.info("Nenhuma operação foi informada.")
     }
 
-    operations.forEach { println(it) }
+    operations.map {
+        Logger.debug()
+        Logger.debug("¬¬¬¬¬ Processando operações [ ${it.joinToString(",")} ]")
+        Logger.debug()
+        val proccess = operationProcessor.process(it.asList())
+        Logger.debug("*********************************************************************************************************")
 
-//    print(Config.getInstance().tax.minOperation)
+        proccess
+    }.map{
+        StreamReadWriteStrategyFactory.ofType("json").let { strategy ->
+            val outputStream = ByteArrayOutputStream()
+
+            strategy.write(outputStream, it.toTypedArray())
+
+            outputStream.toString()
+        }
+    }.forEach {
+        Logger.info(it)
+    }
+
 }

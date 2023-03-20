@@ -1,11 +1,12 @@
 package tax
 
-import model.OperationType
+import model.Operation
+import model.OperationConsolidation
 import java.math.BigDecimal
 
 interface TaxCalculator {
 
-    fun handle(operationType: OperationType) : Boolean
+    fun handle(operation: Operation) : Boolean
 
-    fun calculate(operationType: OperationType, operationTotal: BigDecimal) : BigDecimal
+    fun calculate(operation: Operation, consolidation: OperationConsolidation) : Double
 }

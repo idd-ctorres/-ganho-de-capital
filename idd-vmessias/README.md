@@ -104,11 +104,15 @@ Output:
 
 # Arquitetura
 
-<Resumo do codigo e estratégia utillizada>
+- Kotlin v1.8
+- Gradle v7.4.2
+- Docker
 
 # Bibliotecas
 
-- <listar bibliotecas>
+- Mockk 1.13.4
+- Jackson 2.14.2
+- Kotlin Json Serialization 1.4.1
 
 # Instalação
 
@@ -123,24 +127,24 @@ docker build -t ganho-capital .
 
 - Executando no terminal:
 ```SHELL
-docker run -it --rm ganho-capital sh -c "java -jar ./app.jar"
+docker run -it --rm ganho-capital
 ```
 A aplicação vai aguardar o input das informações e vai devolver o resultado quando receber uma linha vazia.
 
 - Executando via Input Redirection:
 ```SHELL
-docker run -i --rm ganho-capital sh -c 'java -jar ./app.jar' < input.txt
+docker run -i --rm ganho-capital < src/test/resources/input.txt
 ```
 Ou
 ```SHELL
-docker run -i --rm ganho-capital bash -c 'java -jar ./app.jar' <<EOF
+docker run -i --rm ganho-capital << EOF
 [{"operation":"buy", "unit-cost":10.00, "quantity": 100}, {"operation":"sell", "unit-cost":15.00, "quantity": 50}, {"operation":"sell", "unit-cost":15.00, "quantity": 50}]
 [{"operation":"buy", "unit-cost":10.00, "quantity": 10000}, {"operation":"sell", "unit-cost":20.00, "quantity": 5000}, {"operation":"sell", "unit-cost":5.00, "quantity": 5000}]
 
 EOF
 ```
 
-### Instruções
-      1. Faça o fork do desafio;
-      2. Crie um repositório privado no seu github para o projeto;
-      3. Após concluir seu trabalho faça um push;
+- Executando com debug:
+```SHELL
+docker run -eDEBUG=true [....]
+```
