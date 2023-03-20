@@ -18,8 +18,6 @@ interface StreamReadWriteStrategy {
 
 }
 
-// Extensão para que quando for usar não precise informar o tipo da classe
-// Ela será inferida automaticamente pelo tipo T (usando reified com inline)
 inline fun <reified T> StreamReadWriteStrategy.read(resource: InputStream) = read(resource, T::class.java)
 
 inline fun <reified T> StreamReadWriteStrategy.write(outputStream: OutputStream, value: T) = write(outputStream, value, T::class.java)
