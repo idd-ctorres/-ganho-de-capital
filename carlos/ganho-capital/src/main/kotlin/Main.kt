@@ -5,7 +5,7 @@ import utils.ImpostoMapper
 import utils.OperacaoMapper
 import java.util.*
 
-fun main(args: Array<String>) {
+fun main() {
     val scanner = Scanner(System.`in`)
 
     try {
