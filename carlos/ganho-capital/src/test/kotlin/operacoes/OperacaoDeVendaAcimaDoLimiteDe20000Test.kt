@@ -18,7 +18,7 @@ internal class OperacaoDeVendaAcimaDoLimiteDe20000Test {
         OperacaoDeCompra(posicao, compra).calcular()
         OperacaoDeVendaAcimaDoLimiteDe20000(posicao, venda).calcular()
 
-        assertEquals(BigDecimal.ZERO.setScale(2), posicao.impostos.get(0).tax)
-        assertEquals(BigDecimal.valueOf(80000.00).setScale(2), posicao.impostos.get(1).tax)
+        assertEquals(BigDecimal.ZERO.setScale(2), posicao.impostos[0].tax)
+        assertEquals(BigDecimal.valueOf(80000.00).setScale(2), posicao.impostos[1].tax)
     }
 }

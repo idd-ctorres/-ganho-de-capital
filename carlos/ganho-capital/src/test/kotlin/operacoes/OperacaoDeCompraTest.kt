@@ -17,7 +17,7 @@ internal class OperacaoDeCompraTest {
         val operacaoDeCompra = OperacaoDeCompra(posicao, compra)
         assertTrue(operacaoDeCompra.podeCalcular())
         operacaoDeCompra.calcular()
-        assertEquals(BigDecimal.ZERO.setScale(2), posicao.impostos.get(0).tax)
+        assertEquals(BigDecimal.ZERO.setScale(2), posicao.impostos[0].tax)
     }
 
     @Test
@@ -26,7 +26,7 @@ internal class OperacaoDeCompraTest {
         val compra2 = Operacao(TipoOperacaoEnum.COMPRA, BigDecimal.valueOf(15.00), 120)
         val posicao = Posicao()
         listOf(compra1, compra2).forEach{ OperacaoDeCompra(posicao, it).calcular() }
-        assertEquals(BigDecimal.ZERO.setScale(2), posicao.impostos.get(0).tax)
-        assertEquals(BigDecimal.ZERO.setScale(2), posicao.impostos.get(1).tax)
+        assertEquals(BigDecimal.ZERO.setScale(2), posicao.impostos[0].tax)
+        assertEquals(BigDecimal.ZERO.setScale(2), posicao.impostos[1].tax)
     }
 }

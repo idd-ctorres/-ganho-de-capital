@@ -9,7 +9,7 @@ object OperacaoMapper {
     private val MAPPER = ObjectMapper()
     fun obterOperacoesFromJson(json: String?): List<Operacao> {
         return try {
-            Arrays.asList(*MAPPER.readValue<Array<Operacao>>(json, Array<Operacao>::class.java))
+            listOf(*MAPPER.readValue(json, Array<Operacao>::class.java))
         } catch (e: JsonProcessingException) {
             throw RuntimeException(e)
         }
