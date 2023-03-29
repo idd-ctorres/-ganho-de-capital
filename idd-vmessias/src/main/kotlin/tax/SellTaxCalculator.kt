@@ -12,9 +12,9 @@ class SellTaxCalculator : TaxCalculator {
 
     private val config = Config.getInstance()
 
-    override fun handle(operation: Operation) : Boolean {
-        return operation.type == OperationType.SELL
-    }
+    override fun handle(operation: Operation) : Boolean =
+        operation.type == OperationType.SELL
+    
 
     override fun calculate(operation: Operation, consolidation: OperationConsolidation) : Double {
 
