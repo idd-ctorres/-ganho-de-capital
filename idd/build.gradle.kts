@@ -25,9 +25,12 @@ dependencies {
 	implementation("mysql:mysql-connector-java:8.0.33")
 	implementation("org.apache.commons:commons-lang3:3.0")
 	implementation ("com.github.fge:json-patch:1.9")
+	implementation("org.flywaydb:flyway-core")
+	implementation("org.flywaydb:flyway-mysql")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
+
 }
 
 tasks.withType<KotlinCompile> {

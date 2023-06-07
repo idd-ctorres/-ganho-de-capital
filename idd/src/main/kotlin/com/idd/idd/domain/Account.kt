@@ -4,6 +4,7 @@ import jakarta.persistence.*
 import org.apache.commons.lang3.RandomStringUtils
 
 @Entity
+@Table(name = "accounts")
 data class Account (
 
     @Id
@@ -19,7 +20,7 @@ data class Account (
     @Column(nullable = false)
     val branch: String = "3018-X",
 
-    @Column(nullable = false)
+    @Column(name = "is_active", nullable = false)
     var isActive: Boolean = true,
 
     @ManyToOne(fetch = FetchType.LAZY)

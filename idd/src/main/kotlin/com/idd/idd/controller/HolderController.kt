@@ -1,11 +1,12 @@
 package com.idd.idd.controller
 
-import com.github.fge.jsonpatch.JsonPatch
 import com.idd.idd.model.HolderPatchRequestDTO
-import com.idd.idd.model.HolderRequestDTO
+import com.idd.idd.model.HolderPostRequestDTO
+import com.idd.idd.model.HolderResponseDTO
 import com.idd.idd.service.HolderService
 import com.idd.idd.util.CPFValidator
 import jakarta.validation.Valid
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -17,17 +18,27 @@ class HolderController(private val holderService: HolderService) {
     fun validateCPF(@PathVariable cpf: String): Boolean = CPFValidator.isCpfValid(cpf)
 
     @PostMapping
-    fun createHolder(@Valid @RequestBody holderRequestDTO: HolderRequestDTO): ResponseEntity<Any> =  holderService.createHolder(holderRequestDTO)
+    fun createHolder(@Valid @RequestBody holderPostRequestDTO: HolderPostRequestDTO): ResponseEntity<HolderResponseDTO> {
+        val responseHolder = holderService.createHolder(holderPostRequestDTO)
+        return ResponseEntity.ok(responseHolder)
+    }
 
     @GetMapping("/{externalId}")
-    fun getHolder(@PathVariable externalId: String): ResponseEntity<Any> =  holderService.getHolder(externalId)
+    fun getHolder(@PathVariable externalId: String): ResponseEntity<HolderResponseDTO> {
+        val responseHolder: HolderResponseDTO = holderService.getHolder(externalId)
+        return ResponseEntity.ok(responseHolder)
+    }
 
     @PatchMapping("/{externalId}")
     fun updateHolder(@PathVariable externalId: String,
-                    @Valid @RequestBody requestBody: HolderPatchRequestDTO): ResponseEntity<Any> {
-        return holderService.updateHolder(externalId, requestBody)
+                    @Valid @RequestBody requestBody: HolderPatchRequestDTO): ResponseEntity<HolderResponseDTO> {
+        val responseHolder =  holderService.updateHolder(externalId, requestBody)
+        return ResponseEntity.ok(responseHolder)
     }
 
     @DeleteMapping("/{externalId}")
-    fun deleteHolder(@PathVariable externalId: String): ResponseEntity<Any> = holderService.deleteHolder(externalId)
+    fun deleteHolder(@PathVariable externalId: String): ResponseEntity<Any> {
+        holderService.deleteHolder(externalId)
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build()
+    }
 }

@@ -5,23 +5,23 @@ import org.apache.commons.lang3.RandomStringUtils
 
 
 @Entity
+@Table(name = "holders")
 data class Holder (
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
 
-    @Column(nullable = false)
+    @Column(name ="first_name",nullable = false)
     var firstName: String,
 
-
-    @Column(nullable = false)
+    @Column(name = "last_name", nullable = false)
     var lastName: String,
 
     @Column(nullable = false, unique = true)
     var cpf: String,
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "external_id", nullable = false, unique = true)
     var externalId: String? = null,
 
     @OneToMany(mappedBy = "holder", cascade = [CascadeType.ALL], orphanRemoval = true)
